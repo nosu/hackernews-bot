@@ -2,7 +2,7 @@ cronJob = require('cron').CronJob
 request = require('request')
 
 module.exports = (robot) ->
-  room = {room: "#articles"}
+  room = room: "articles"
   new cronJob '0 55 8-23/3 * * *', () ->
     postRecentArticles robot, score, room
   , null

@@ -3,7 +3,8 @@ request = require('request')
 
 module.exports = (robot) ->
   room = { room: 'hn' }
-  new cronJob '0 55 * * * *', () ->
+  score = 500
+  new cronJob '0 0 * * * *', () ->
     postRecentArticles robot, score, room
   , null
   , true
@@ -24,8 +25,9 @@ module.exports = (robot) ->
 
   postRecentArticles = (robot, score, room) ->
     articles = getArticles score, (articles) ->
-      for article, index in articles
-        robot.send room "#{article.title}(Score: #{article.score})\n#{article.url}"
+      for i in [0..4]
+        if articles[i]
+          robot.send room "#{articles[i].title}(Score: #{articles[i].score})\n#{articles[i].url}"
 
   replyRecentArticles = (res, score) ->
     articles = getArticles score, (articles) ->

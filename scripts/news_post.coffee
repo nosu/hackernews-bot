@@ -2,8 +2,8 @@ cronJob = require('cron').CronJob
 request = require('request')
 
 module.exports = (robot) ->
-  room = room: "articles"
-  new cronJob '0 55 8-23/3 * * *', () ->
+  room = { room: 'hn' }
+  new cronJob '0 55 * * * *', () ->
     postRecentArticles robot, score, room
   , null
   , true
@@ -14,6 +14,7 @@ module.exports = (robot) ->
     if res.match[2]
       score = res.match[2]
     replyRecentArticles(res, score)
+    robot.send {room: 'hn'} 'robot.send'
 
   getArticles = (score, callback) ->
     request "http://hnapp.com/json?q=score%3E#{score}", (error, response, body) ->

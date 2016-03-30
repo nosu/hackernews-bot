@@ -4,7 +4,7 @@ request = require('request')
 module.exports = (robot) ->
   room = room: 'articles'
   score = 500
-  new cronJob '0 0 * * * *', () ->
+  new cronJob '0 0 8-23 * * *', () ->
     postRecentArticles robot, score, room
   , null
   , true

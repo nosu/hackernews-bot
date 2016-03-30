@@ -24,8 +24,9 @@ module.exports = (robot) ->
 
   postRecentArticles = (robot, score, room) ->
     articles = getArticles score, (articles) ->
-      for i in [0..9]
-        robot.send room "#{articles[i].title}(Score: #{articles[i].score})\n#{articles[i].url}"
+      for i in [0..4]
+        if articles[i]
+          robot.send room "#{articles[i].title}(Score: #{articles[i].score})\n#{articles[i].url}"
 
   replyRecentArticles = (res, score) ->
     articles = getArticles score, (articles) ->
